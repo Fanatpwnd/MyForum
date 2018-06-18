@@ -40,4 +40,22 @@ Route::get('/DeleteThread', 'ThreadController@deleteThread');
 Route::get('/RestoreThread', 'ThreadController@restoreThread');
 //http://localhost:8000/DeleteThread?id=2
 
+//************/Messages/*************
+
+Route::get('/GetMessages/{id_thread}', 'MessageController@getMessages');
+Route::get('/GetDeletedMessages/{id_thread}', 'MessageController@getDeletedMessages');
+
+Route::get('/AddMessage', 'MessageController@addMessage'); 
+//http://localhost:8000/AddMessage?msg_name=TestMessage&user_id=2&thread_id=3&msg_body=TestMessageText
+
+Route::get('/DeleteMessage', 'MessageController@deleteMessage');
+//http://localhost:8000/DeleteMessage?id=2
+
+Route::get('/RestoreMessage', 'MessageController@restoreMessage');
+//http://localhost:8000/DeleteMessage?id=2
+
+//************/Debug/*************
+Route::get('/Debug', 'MessageController@Debug');
+
+
 //================[TESTING ROUTES]====================
