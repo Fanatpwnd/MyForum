@@ -12,7 +12,7 @@ class ThreadController extends Controller
         $thread = $request->all();
 
         Thread::insert(['thread_name' => $thread['thread_name'],
-        'user_id' => $thread['user_id'],
+        'user_id' => $request->user(),
         'section_id' => $thread['section_id'],
         'is_delete' => false, 
         'created_at' => date("Y-m-d H:i:s"),
@@ -38,12 +38,12 @@ class ThreadController extends Controller
     public function getThreads(int $section_id)
     {
         $threads = Thread::where('section_id', $section_id)->where('is_delete', 0)->get();
-        return $threads;
+        return view('testmainpage', ['content' => $threads]);
     }
 
     public function getDeletedThreads(int $section_id)
     {
         $threads = Thread::where('section_id', $section_id)->where('is_delete', 1)->get();
-        return $threads;
+        return view('testmainpage', ['content' => $thread]);
     }
 }

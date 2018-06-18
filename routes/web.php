@@ -59,3 +59,7 @@ Route::get('/Debug', 'MessageController@Debug');
 
 
 //================[TESTING ROUTES]====================
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

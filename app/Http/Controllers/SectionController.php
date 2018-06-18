@@ -25,6 +25,6 @@ class SectionController extends Controller
     public static function getSections()
     {
         $content = Section::all();
-        return $content;
+        return view('testmainpage', ['content' => $content]);
     }
 }

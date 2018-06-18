@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,12 @@
     <title>Testing</title>
 </head>
 <body>
-    <!-- TESTING PAGE -->
     {{ $content }}
 </body>
-</html>
+</html> -->
+
+@extends('layouts.app')
+
+@section('content')
+{{ $content }}
+@endsection

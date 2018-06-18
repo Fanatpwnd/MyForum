@@ -18,7 +18,7 @@ class MessageController extends Controller
 
         Message::insert(['msg_name' => $msg['msg_name'],
         'msg_body' => $msg['msg_body'],
-        'user_id' => $msg['user_id'],
+        'user_id' => $request->user(),
         'thread_id' => $msg['thread_id'],
         'is_delete' => false, 
         'created_at' => date("Y-m-d H:i:s"),
@@ -44,7 +44,7 @@ class MessageController extends Controller
     public function getMessages(int $thread_id)
     {
         $msgs = Message::where('thread_id', $thread_id)->where('is_delete', 0)->get();
-        return $msgs;
+        return view('testmainpage', ['content' => $msgs]);
     }
 
     public function getDeletedMessages(int $thread_id)
@@ -53,8 +53,8 @@ class MessageController extends Controller
         return $msgs;
     }
 
-    public function Debug()
+    public function Debug(Request $request)
     {
-        return empty(Thread::where('thread_id', 2)->get()->toArray())? "true" : "false";
+        return $request->user();
     }
 }
