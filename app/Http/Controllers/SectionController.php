@@ -17,9 +17,9 @@ class SectionController extends Controller
 
     public function deleteSection(Request $request)
     {
-        $section = $request->all()['id'];
-        Section::where('section_id', '=', $section)->delete();
-        return view('testing', ['content' => 'Deleted']); //TODO: change view
+        $section_id = $request->all()['id'];
+        Section::where('section_id', '=', $section_id)->delete();
+        return view('testing', ['content' => 'Section deleted']); //TODO: change view
     }
 
     public static function getSections()
