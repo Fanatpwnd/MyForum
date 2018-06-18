@@ -11,6 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+
+//================[TESTING ROUTES]====================
+
+Route::get('/', 'SectionController@addSection');
+
+Route::get('/AddSection', 'SectionController@addSection');
+
+Route::get('/DeleteSection', 'SectionController@deleteSection');
+
+//================[TESTING ROUTES]====================
