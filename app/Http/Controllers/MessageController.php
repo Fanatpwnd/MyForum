@@ -18,39 +18,43 @@ class MessageController extends Controller
 
         Message::insert(['msg_name' => $msg['msg_name'],
         'msg_body' => $msg['msg_body'],
-        'user_id' => $request->user(),
+        'user_id' => $request->user()['id'],
         'thread_id' => $msg['thread_id'],
         'is_delete' => false, 
         'created_at' => date("Y-m-d H:i:s"),
         'updated_at' => date("Y-m-d H:i:s")]);
 
-        return view('testing', ['content' => 'Message created']); //TODO: change view
+        
+        $this->getMessages($msg['thread_id']);
     }
 
     public function deleteMessage(Request $request)
     {
-        $msg_id = $request->all()['id'];
-        Message::where('msg_id', $msg_id )->update(['is_delete' => true]);
-        return view('testing', ['content' => 'Message deleted']); //TODO: change view
+        $msg = $request->all();
+        Message::where('msg_id', $msg['id'] )->update(['is_delete' => true]);
+        
+        $this->getMessages($msg['thread_id']);
     }
 
     public function restoreMessage(Request $request)
     {
-        $msg_id = $request->all()['id'];
-        Message::where('msg_id', $msg_id )->update(['is_delete' => false]);
-        return view('testing', ['content' => 'Message restored']); //TODO: change view
+        $msg = $request->all();
+        Message::where('msg_id', $msg['id'] )->update(['is_delete' => false]);
+        
+        $this->getMessages($msg['thread_id']);
     }
 
     public function getMessages(int $thread_id)
     {
+        $section = Thread::where('thread_id', $thread_id)->get()[0];
         $msgs = Message::where('thread_id', $thread_id)->where('is_delete', 0)->get();
-        return view('testmainpage', ['content' => $msgs]);
+        return view('main', ['content' => $msgs, 'type_page' => 'messages', 'section_id' => $section['section_id']]);
     }
 
     public function getDeletedMessages(int $thread_id)
     {
         $msgs = Message::where('thread_id', $thread_id)->where('is_delete', 1)->get();
-        return $msgs;
+        return view('main', ['content' => $msgs, 'type_page' => 'messages']);
     }
 
     public function Debug(Request $request)

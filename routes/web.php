@@ -18,7 +18,7 @@
 
 //************/Sections/*************
 
-Route::get('/GetSections', 'SectionController@getSections');
+Route::get('/Sections', 'SectionController@getSections');
 
 Route::get('/AddSection', 'SectionController@addSection');
 //http://localhost:8000/AddSection?section_name=Mainsection
@@ -28,7 +28,7 @@ Route::get('/DeleteSection', 'SectionController@deleteSection');
 
 //*************/Threads/*************
 
-Route::get('/GetThreads/{id_section}', 'ThreadController@getThreads');
+Route::get('/Threads/{id_section}', 'ThreadController@getThreads');
 Route::get('/GetDeletedThreads/{id_section}', 'ThreadController@getDeletedThreads');
 
 Route::get('/AddThread', 'ThreadController@addThread'); 
@@ -42,7 +42,7 @@ Route::get('/RestoreThread', 'ThreadController@restoreThread');
 
 //************/Messages/*************
 
-Route::get('/GetMessages/{id_thread}', 'MessageController@getMessages');
+Route::get('/Messages/{id_thread}', 'MessageController@getMessages');
 Route::get('/GetDeletedMessages/{id_thread}', 'MessageController@getDeletedMessages');
 
 Route::get('/AddMessage', 'MessageController@addMessage'); 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Section;
+use App\Thread;
 
 class SectionController extends Controller
 {
@@ -12,19 +13,26 @@ class SectionController extends Controller
         Section::insert(['section_name' => $section, 
                     'created_at' => date("Y-m-d H:i:s"),
                     'updated_at' => date("Y-m-d H:i:s")]);
-        return view('testing', ['content' => 'Topic created']); //TODO: change view
+        
+        return $this->getSections();
     }
 
     public function deleteSection(Request $request)
     {
         $section_id = $request->all()['id'];
         Section::where('section_id', '=', $section_id)->delete();
-        return view('testing', ['content' => 'Section deleted']); //TODO: change view
+        
+        return $this->getSections();
     }
 
     public static function getSections()
     {
-        $content = Section::all();
-        return view('testmainpage', ['content' => $content]);
+        $sections = Section::all();
+        foreach ($sections as &$item) {
+            $item['count'] = Thread::where('section_id', $item['section_id'])->where('is_delete', false)->count();
+        }
+        unset($item); 
+        //http://php.net/manual/ru/control-structures.foreach.php
+        return view('main', ['content' => $sections, 'type_page' => 'sections']);
     }
 }
