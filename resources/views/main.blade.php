@@ -25,6 +25,7 @@
             @auth
             <form action="\AddThread" method="get">
                 <input type="text" name="thread_name" id="thread_name">
+                <input type="text" name="msg_body" id="msg_body">
                 <input type="hidden" name="section_id" value="{{$content[0]->section_id}}">
                 <input type="submit" value="Add topic">
             </form>
@@ -52,6 +53,19 @@
                 <input type="submit" value="Add message">
             </form>
             @endauth
+        @break
+
+        @case('trash')
+            <a href="\Sections">Back</a><br>
+            @foreach ($content as $item)
+                <p>{{$item->thread_id}}</p><h2>{{ $item->thread_name }}</h2>
+                @auth
+                <form action="/RestoreThread" method="get">
+                <input type="hidden" name="id" value="{{$item->thread_id}}">
+                <input type="submit" value="Restore">
+                </form>
+                @endauth
+            @endforeach
         @break
 
     @default

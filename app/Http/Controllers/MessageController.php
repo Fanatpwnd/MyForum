@@ -25,15 +25,27 @@ class MessageController extends Controller
         'updated_at' => date("Y-m-d H:i:s")]);
 
         
-        $this->getMessages($msg['thread_id']);
+        return back()->withInput();
     }
+
+    public static function addFirstMessage($msg)
+    {
+        Message::insert(['msg_name' => $msg['msg_name'],
+        'msg_body' => $msg['msg_body'],
+        'user_id' => $msg['user_id'],
+        'thread_id' => $msg['thread_id'],
+        'is_delete' => false, 
+        'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' => date("Y-m-d H:i:s")]);
+    }
+
 
     public function deleteMessage(Request $request)
     {
         $msg = $request->all();
         Message::where('msg_id', $msg['id'] )->update(['is_delete' => true]);
         
-        $this->getMessages($msg['thread_id']);
+        return back()->withInput();
     }
 
     public function restoreMessage(Request $request)
@@ -41,7 +53,7 @@ class MessageController extends Controller
         $msg = $request->all();
         Message::where('msg_id', $msg['id'] )->update(['is_delete' => false]);
         
-        $this->getMessages($msg['thread_id']);
+        return back()->withInput();
     }
 
     public function getMessages(int $thread_id)
@@ -55,6 +67,14 @@ class MessageController extends Controller
     {
         $msgs = Message::where('thread_id', $thread_id)->where('is_delete', 1)->get();
         return view('main', ['content' => $msgs, 'type_page' => 'messages']);
+    }
+
+    public static function deleteAllMessagesThisThread($thread_id) {
+        Message::where('thread_id', $thread_id )->update(['is_delete' => true]);
+    }
+
+    public static function restoreAllMessagesThisThread($thread_id) {
+        Message::where('thread_id', $thread_id )->update(['is_delete' => false]);
     }
 
     public function Debug(Request $request)

@@ -32,7 +32,7 @@ Route::get('/Threads/{id_section}', 'ThreadController@getThreads');
 Route::get('/GetDeletedThreads/{id_section}', 'ThreadController@getDeletedThreads');
 
 Route::get('/AddThread', 'ThreadController@addThread'); 
-//http://localhost:8000/AddThread?thread_name=TestThread&user_id=2&section_id=7
+//http://localhost:8000/AddThread?thread_name=TestThread&user_id=2&section_id=7&msg_body=TestMsg
 
 Route::get('/DeleteThread', 'ThreadController@deleteThread');
 //http://localhost:8000/DeleteThread?id=2
