@@ -30,6 +30,15 @@
                 <input type="submit" value="Add topic">
             </form>
             @endauth
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         @break
 
     @case('messages')
@@ -53,6 +62,16 @@
                 <input type="submit" value="Add message">
             </form>
             @endauth
+            <!--https://laravel.com/docs/5.6/validation#rule-unique -->
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         @break
 
         @case('trash')

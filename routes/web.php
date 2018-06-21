@@ -16,6 +16,10 @@
 
 //================[TESTING ROUTES]====================
 
+Route::get('/', function(){
+    return redirect('/Sections');
+});
+
 //************/Sections/*************
 
 Route::get('/Sections', 'SectionController@getSections');

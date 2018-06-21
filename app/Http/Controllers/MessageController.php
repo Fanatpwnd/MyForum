@@ -10,6 +10,10 @@ class MessageController extends Controller
 {
     public function addMessage(Request $request)
     {
+        $request->validate([
+            'msg_body' => 'required|max:2000',
+            'msg_name' => 'required|max:500'
+        ]);
         $msg = $request->all();
 
         if (empty(Thread::where('thread_id', $msg['thread_id'])->get()->toArray())){
