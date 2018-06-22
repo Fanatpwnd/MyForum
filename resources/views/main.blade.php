@@ -1,19 +1,23 @@
 @extends('layouts.app')
-
+<div class="main container">
 @section('content')
 @switch($type_page)
     @case('sections')
+            <h1 align="center" class="text-info">Sections</h1>
             @foreach ($content as $item)
-                <a href='\Threads\{{$item->section_id}}'>{{ $item->section_name }}</a>
-                <p>{{$item->count}}</p>
+                <div style="padding: 10px;border-style: solid;border-width: 1px; margin-top: 2px; margin-left: 30px; margin-right: 30px;">
+                <h3><a href='\Threads\{{$item->section_id}}'>{{ $item->section_name }}</a></h3>
+                <p class='text-secondary'>Thread count: {{$item->count}}</p>
+                </div>
             @endforeach
         @break
 
     @case('threads')
-            <a href="\Sections">Back</a><br>
+            <h1 align="center" class="text-info">Threads</h1><br>
             @foreach ($content as $item)
-                <a href='\Messages\{{$item->thread_id}}'>{{ $item->thread_name }}</a>
-                <p>{{$item->count}}</p>
+            <div style="padding: 10px;border-style: solid;border-width: 1px; margin-top: 2px; margin-left: 30px; margin-right: 30px;">
+            <h3><a href='\Messages\{{$item->thread_id}}'>{{ $item->thread_name }}</a></h3>
+                <p>Messages count: {{$item->count}}</p>
                 @auth
                 <form action="/DeleteThread" method="get">
                 <input type="hidden" name="id" value="{{$item->thread_id}}">
@@ -21,15 +25,19 @@
                 <input type="submit" value="Delete">
                 </form>
                 @endauth
+            </div>
             @endforeach
             @auth
+            <div class='container' style='margin-top : 10px;'>
             <form action="\AddThread" method="get">
-                <input type="text" name="thread_name" id="thread_name">
-                <input type="text" name="msg_body" id="msg_body">
+                Thread title: <input type="text" name="thread_name" id="thread_name">
+                Message body: <input type="text" name="msg_body" id="msg_body">
                 <input type="hidden" name="section_id" value="{{$content[0]->section_id}}">
                 <input type="submit" value="Add topic">
             </form>
+            </div>
             @endauth
+            <h4 align="center"><a href="\Sections">Back</a></h4>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -39,12 +47,15 @@
                     </ul>
                 </div>
             @endif
+            
         @break
 
     @case('messages')
-            <a href="\Threads\{{$section_id}}">Back</a><br>
+            <h1 align="center" class="text-info">Messages</h1>
             @foreach ($content as $item)
-                {{$item->msg_id}} <h3>{{ $item->msg_name }}</h3>
+            <div style="padding: 10px;border-style: solid;border-width: 1px; margin-top: 2px; margin-left: 30px; margin-right: 30px;">
+                <h4><span class='text-secondary'>ID #{{$item->msg_id}} | </span>
+                <span class='text-info'> {{ $item->msg_name }} <span></h4><hr>
                 <p>{{$item->msg_body}}</p>
                 @auth
                 <form action="/DeleteMessage" method="get">
@@ -53,15 +64,19 @@
                 <input type="submit" value="Delete">
                 </form>
                 @endauth
+            </div>
             @endforeach
             @auth
-            <form action="\AddMessage" method="get">
-                <input type="text" name="msg_name" id="msg_name">
-                <input type="text" name="msg_body" id="msg_body">
+            <div class='container' style='margin-top : 10px;'>
+            <form action="\AddMessage" method="get" >
+                Message title: <input type="text" name="msg_name" id="msg_name">
+                Message body: <input type="text" name="msg_body" id="msg_body">
                 <input type="hidden" name="thread_id" value="{{$content[0]->thread_id}}">
                 <input type="submit" value="Add message">
             </form>
+            </div>
             @endauth
+            <h4 align="center"><a href="\Threads\{{$section_id}}">Back</a></h4>
             <!--https://laravel.com/docs/5.6/validation#rule-unique -->
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -91,3 +106,4 @@
         Nothing
 @endswitch
 @endsection
+</div>
