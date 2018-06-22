@@ -11,8 +11,8 @@ class MessageController extends Controller
     public function addMessage(Request $request)
     {
         $request->validate([
-            'msg_body' => 'required|max:2000',
-            'msg_name' => 'required|max:500'
+            'msg_body' => 'required|max:2000|min:100',
+            'msg_name' => 'required|max:500|min:10'
         ]);
         $msg = $request->all();
 

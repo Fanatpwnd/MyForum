@@ -26,12 +26,13 @@
                 </form>
                 @endauth
             </div>
+            {{ $item->messages }}
             @endforeach
             @auth
             <div class='container' style='margin-top : 10px;'>
             <form action="\AddThread" method="get">
-                Thread title: <input type="text" name="thread_name" id="thread_name">
-                Message body: <input type="text" name="msg_body" id="msg_body">
+                Thread title: <input type="text" name="thread_name" id="thread_name" required>
+                Message body: <input type="text" name="msg_body" id="msg_body" required>
                 <input type="hidden" name="section_id" value="{{$content[0]->section_id}}">
                 <input type="submit" value="Add topic">
             </form>
@@ -69,8 +70,8 @@
             @auth
             <div class='container' style='margin-top : 10px;'>
             <form action="\AddMessage" method="get" >
-                Message title: <input type="text" name="msg_name" id="msg_name">
-                Message body: <input type="text" name="msg_body" id="msg_body">
+                Message title: <input type="text" name="msg_name" id="msg_name" required>
+                Message body: <input type="text" name="msg_body" id="msg_body" required>
                 <input type="hidden" name="thread_id" value="{{$content[0]->thread_id}}">
                 <input type="submit" value="Add message">
             </form>
