@@ -16,50 +16,41 @@ class ThreadController extends Controller
             'thread_name' => 'required|max:500:10'
         ]);
 
-        $thread = $request->all();
+        $thread = Thread::create([
+                            'title'         => $request['thread_name'],
+                            'user_id'       => $request->user()['id'],
+                            'section_id'    => $request['section_id'],
+                            'is_delete'     => false]);
 
-        Thread::insert(['thread_name' => $thread['thread_name'],
-        'user_id' => $request->user()['id'],
-        'section_id' => $thread['section_id'],
-        'is_delete' => false, 
-        'created_at' => date("Y-m-d H:i:s"),
-        'updated_at' => date("Y-m-d H:i:s")]);
+        Message::create([   'body'      => $request['msg_body'], 
+                            'user_id'   => $request->user()['id'],
+                            'thread_id' => $thread['id'],
+                            'is_delete' => false]);
 
-        $msg = $thread;
-        $msg['msg_name'] = $msg['thread_name'];
-        $msg['thread_id'] = Thread::where('thread_name', $thread['thread_name'])->where('is_delete', false)->orderBy('thread_id', 'desc')->first()['thread_id'];
-        $msg['user_id'] = $request->user()['id'];
-        MessageController::addFirstMessage($msg);
-
-        //TODO: add first message in topic
         return back()->withInput(); 
     }
 
     public function deleteThread(Request $request)
     {
-        $thread = $request->all();
-        Thread::where('thread_id', $thread['id'] )->update(['is_delete' => true]);
-        MessageController::deleteAllMessagesThisThread($thread['id']);
+        $thread = Thread::find($request['id']);
+        $thread->update(['is_delete' => true]);
+        $thread->messages->transform(function ($item, $key) {
+            $item['is_delete'] = true;
+        });
         return back()->withInput();
     }
 
     public function restoreThread(Request $request)
     {
-        $thread = $request->all();
-        Thread::where('thread_id', $thread['id'] )->update(['is_delete' => false]);
-        MessageController::restoreAllMessagesThisThread($thread['id']);
+        $thread = Thread::find($request['id']);
+        $thread->update(['is_delete' => false]);
+        $thread->messages->transform(function ($item, $key) {$item['is_delete'] = false;});
         return back()->withInput();
     }
 
-
-    //=========!!!!!!!!!!Thread::pluck('title');
     public function getThreads(int $section_id)
     {
         $threads = Thread::where('section_id', $section_id)->where('is_delete', 0)->get();
-        foreach ($threads as &$item) {
-            $item['count'] = Message::where('thread_id', $item['thread_id'])->where('is_delete', false)->count();
-        }
-        unset($item);
         return view('main', ['content' => $threads, 'type_page' => 'threads']);
     }
 

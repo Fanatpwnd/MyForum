@@ -9,30 +9,21 @@ use App\Thread;
 class SectionController extends Controller
 {
     public function addSection(Request $request) {
-        $section = $request->all()['section_name'];
-        Section::insert(['section_name' => $section, 
-                    'created_at' => date("Y-m-d H:i:s"),
-                    'updated_at' => date("Y-m-d H:i:s")]);
-        
+        Section::create([   'name'      => $request['section_name'], 
+                            'desc'      => $request['desc'],
+                            'is_hide'   => false]);
         return $this->getSections();
     }
 
     public function deleteSection(Request $request)
     {
-        $section_id = $request->all()['id'];
-        Section::where('section_id', '=', $section_id)->delete();
-        
+        Section::where('id', '=', $request['id'])->update(['is_hide' => true]);
         return $this->getSections();
     }
 
     public static function getSections()
     {
-        $sections = Section::all();
-        foreach ($sections as &$item) {
-            $item['count'] = Thread::where('section_id', $item['section_id'])->where('is_delete', false)->count();
-        }
-        unset($item); 
-        //http://php.net/manual/ru/control-structures.foreach.php
+        $sections = Section::where('is_hide', false)->get();
         return view('main', ['content' => $sections, 'type_page' => 'sections']);
     }
 }
