@@ -8,12 +8,13 @@ class Message extends Model
 {
     public function thread()
     {
-        return $this->belongsTo(Thread::class, 'thread_id');
+        return $this->belongsTo(Thread::class);
     }
 
-    public function user() {
-        return $this->belongsTo(User::class, 'user_id');
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
-    protected $primaryKey = 'msg_id';
+    protected $fillable = ['body', 'user_id', 'thread_id', 'is_delete'];
 }

@@ -51,6 +51,8 @@ class ThreadController extends Controller
         return back()->withInput();
     }
 
+
+    //=========!!!!!!!!!!Thread::pluck('title');
     public function getThreads(int $section_id)
     {
         $threads = Thread::where('section_id', $section_id)->where('is_delete', 0)->get();

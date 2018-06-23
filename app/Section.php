@@ -8,8 +8,8 @@ class Section extends Model
 {
     public function threads()
     {
-        return $this->hasMany(Thread::class, 'thread_id');
+        return $this->hasMany(Thread::class);
     }
 
-    protected $primaryKey = 'section_id';
+    protected $fillable = ['name', 'desc', 'is_hide'];
 }

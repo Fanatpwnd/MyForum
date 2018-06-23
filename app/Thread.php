@@ -6,19 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
-    protected $primaryKey = 'thread_id';
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
+    }
 
     public function messages()
     {
-        return $this->hasMany(Message::class, 'msg_id');
+        return $this->hasMany(Message::class);
     }
 
-    public function section()
+    public function user()
     {
-        return $this->belongsTo(Section::class, 'section_id');
+        return $this->belongsTo(User::class);
     }
 
-    public function user() {
-        return $this->belongsTo(User::class, 'user_id');
-    }
+    protected $fillable = ['title', 'user_id', 'section_id', 'is_delete'];
 }
