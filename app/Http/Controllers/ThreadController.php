@@ -12,7 +12,7 @@ class ThreadController extends Controller
     public function addThread(Request $request)
     {
         $request->validate([
-            'msg_body' => 'required|max:2000|min:100',
+            'msg_body' => 'required|max:2000|min:10',
             'thread_name' => 'required|max:500:10'
         ]);
 

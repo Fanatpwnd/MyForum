@@ -15,6 +15,10 @@
         @include('layouts.messages')   
         @break
 
+    @case('user')
+        @include('layouts.user')
+        @break
+
     @default
         Nothing
 @endswitch

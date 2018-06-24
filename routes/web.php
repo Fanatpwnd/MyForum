@@ -58,9 +58,8 @@ Route::get('/DeleteMessage', 'MessageController@deleteMessage');
 Route::get('/RestoreMessage', 'MessageController@restoreMessage');
 //http://localhost:8000/DeleteMessage?id=2
 
-//************/Debug/*************
-Route::get('/Debug', 'MessageController@Debug');
-
+//**************/User/**************
+Route::get('/user/{id}', 'UserInfoController@getUser');
 
 //================[TESTING ROUTES]====================
 

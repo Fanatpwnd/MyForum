@@ -11,17 +11,12 @@ class MessageController extends Controller
     public function addMessage(Request $request)
     {
         $request->validate([
-            'msg_body' => 'required|max:2000|min:100',
-            'msg_name' => 'required|max:500|min:10'
+            'body' => 'required|max:2000|min:10',
         ]);
 
-        if (empty(Thread::where('thread_id', $msg['thread_id'])->get()->toArray())){
-            return view('testing', ['content' => 'Thread does not exist']); //TODO: change view
-        }
-
-        Message::create([   'body'      => $msg['msg_body'],
+        Message::create([   'body'      => $request['body'],
                             'user_id'   => $request->user()['id'],
-                            'thread_id' => $msg['thread_id'],
+                            'thread_id' => $request['thread_id'],
                             'is_delete' => false]);
 
         return back()->withInput();
