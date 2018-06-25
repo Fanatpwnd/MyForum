@@ -1,7 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+
+<div class='container'>
+    <form action="/Register" method="post" class='card'  style='padding: 10px;'>
+    <span>Login:</span><input type="text" name="login" class='form-group'><br>              
+    <span>Nickname:</span><input type="text" name="nickname" class='form-group'><br>
+    <span>Email:</span><input type="text" name="email" class='form-group'><br>
+    <span>Password:</span><input type="password" name="pass" class='form-group'><br>
+    <span>Confirm password:</span><input type="password" name="pass_conf" class='form-group'><br>
+    <hr>
+    <input type="submit" value="Register" class='btn btn-secondary'>
+    </form>
+</div>
+@endsection
+
+<!-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -81,5 +95,4 @@
             </div>
         </div>
     </div>
-</div>
-@endsection
+</div> -->
