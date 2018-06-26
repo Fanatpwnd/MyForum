@@ -65,6 +65,12 @@
                                     </form>
                                 </div>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/load">Load</a>
+                            </li>
+                            <li class='nav-item'>
+                                <a class='nav-link' href="/user/{{ Auth::user()->id }}"> Profile </a>
+                            </li>
                         @endguest
                     </ul>
                 </div>

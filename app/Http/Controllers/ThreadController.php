@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Thread;
 use App\Message;
+use App\Section;
 use Illuminate\Http\RedirectResponse;
 
 class ThreadController extends Controller
@@ -48,7 +49,7 @@ class ThreadController extends Controller
         return back()->withInput();
     }
 
-    public function getThreads(int $section_id)
+    public function getThreads(int $section_id, Section $section)
     {
         $threads = Thread::where('section_id', $section_id)->where('is_delete', 0)->get();
         return view('main', ['content' => $threads, 'type_page' => 'threads']);

@@ -14,7 +14,8 @@
             @endforeach
             @auth
             <div class='container' style='margin-top : 10px;'>
-            <form action="\AddThread" method="get">
+            <form action="\AddThread" method="post">
+                @csrf
                 Thread title: <input type="text" name="thread_name" id="thread_name" required>
                 Message body: <input type="text" name="msg_body" id="msg_body" required>
                 <input type="hidden" name="section_id" value="{{$content[0]->section_id}}">

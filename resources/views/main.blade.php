@@ -19,6 +19,10 @@
         @include('layouts.user')
         @break
 
+    @case('avatar')
+        @include('layouts.load')
+        @break
+
     @default
         Nothing
 @endswitch

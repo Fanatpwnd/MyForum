@@ -24,10 +24,10 @@ Route::get('/', function(){
 
 Route::get('/Sections', 'SectionController@getSections');
 
-Route::get('/AddSection', 'SectionController@addSection');
+Route::post('/AddSection', 'SectionController@addSection');
 //http://localhost:8000/AddSection?section_name=Mainsection
 
-Route::get('/DeleteSection', 'SectionController@deleteSection');
+Route::post('/DeleteSection', 'SectionController@deleteSection');
 //http://localhost:8000/DeleteSection?id=2
 
 //*************/Threads/*************
@@ -35,7 +35,7 @@ Route::get('/DeleteSection', 'SectionController@deleteSection');
 Route::get('/Threads/{id_section}', 'ThreadController@getThreads');
 Route::get('/GetDeletedThreads/{id_section}', 'ThreadController@getDeletedThreads');
 
-Route::get('/AddThread', 'ThreadController@addThread'); 
+Route::post('/AddThread', 'ThreadController@addThread'); 
 //http://localhost:8000/AddThread?thread_name=TestThread&user_id=2&section_id=7&msg_body=TestMsg
 
 Route::get('/DeleteThread', 'ThreadController@deleteThread');
@@ -60,6 +60,10 @@ Route::get('/RestoreMessage', 'MessageController@restoreMessage');
 
 //**************/User/**************
 Route::get('/user/{id}', 'UserInfoController@getUser');
+
+//**************/Load/**************
+Route::get('/load', 'AvatarController@load');
+Route::post('loadImage', 'AvatarController@store');
 
 //================[TESTING ROUTES]====================
 
