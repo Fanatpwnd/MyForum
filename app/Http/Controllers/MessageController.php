@@ -23,7 +23,7 @@ class MessageController extends Controller
     }
 
     public function deleteMessage(Request $request)
-    {
+    {   
         Message::where('id', $request['id'] )->update(['is_delete' => true]);
         return back()->withInput();
     }

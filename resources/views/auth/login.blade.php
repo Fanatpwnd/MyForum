@@ -2,17 +2,16 @@
 
 @section('content')
 
-<div class='container'>
+<!-- <div class='container'>
     <form action="/Login" method="post" class='card'  style='padding: 10px;'>
     <span>Login:</span><input type="text" name="login" class='form-group'><br>              
     <span>Password:</span><input type="password" name="pass" class='form-group'><br>
     <hr>
     <input type="submit" value="Login" class='btn btn-secondary'>
     </form>
-</div>
-@endsection
+</div> -->
 
-<!-- <div class="container">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -76,4 +75,7 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
+@endsection
+
+
