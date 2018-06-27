@@ -37,7 +37,8 @@ class MessageController extends Controller
     public function getMessages(int $thread_id)
     {
         $msgs = Message::where('thread_id', $thread_id)->where('is_delete', 0)->get();
-        return view('main', ['content' => $msgs, 'type_page' => 'messages']);
+        return view('main', ['content' => $msgs, 'type_page' => 'messages', 'thread_id' => $thread_id, 'section_id' => Thread::find($thread_id)->section['id']]);
+        //TODO: Remove var 'section_id'
     }
 
     public function getDeletedMessages(int $thread_id)
