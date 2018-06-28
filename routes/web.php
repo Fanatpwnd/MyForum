@@ -40,7 +40,7 @@ Route::get('/GetDeletedThreads/{id_section}', 'ThreadController@getDeletedThread
 Route::post('/AddThread', 'ThreadController@addThread'); 
 //http://localhost:8000/AddThread?thread_name=TestThread&user_id=2&section_id=7&msg_body=TestMsg
 
-Route::get('/DeleteThread', 'ThreadController@deleteThread')->middleware('delete');
+Route::post('/DeleteThread', 'ThreadController@deleteThread')->middleware('delete');
 //http://localhost:8000/DeleteThread?id=2
 
 Route::get('/RestoreThread', 'ThreadController@restoreThread');
@@ -57,7 +57,7 @@ Route::get('/GetDeletedMessages/{id_thread}', 'MessageController@getDeletedMessa
 Route::post('/AddMessage', 'MessageController@addMessage'); 
 //http://localhost:8000/AddMessage?msg_name=TestMessage&user_id=2&thread_id=3&msg_body=TestMessageText
 
-Route::get('/DeleteMessage', 'MessageController@deleteMessage')->middleware('delete');
+Route::post('/DeleteMessage', 'MessageController@deleteMessage')->middleware('delete');
 //http://localhost:8000/DeleteMessage?id=2
 
 Route::get('/RestoreMessage', 'MessageController@restoreMessage');
