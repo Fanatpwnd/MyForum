@@ -54,6 +54,8 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/load">Load</a>
+                                    <a class="dropdown-item" href="/user/{{ Auth::user()->id }}"> Profile </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -63,14 +65,10 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                                </div>
+
+                                </div>                         
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/load">Load</a>
-                            </li>
-                            <li class='nav-item'>
-                                <a class='nav-link' href="/user/{{ Auth::user()->id }}"> Profile </a>
-                            </li>
+                           
                         @endguest
                     </ul>
                 </div>
