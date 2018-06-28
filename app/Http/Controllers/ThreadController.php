@@ -14,7 +14,7 @@ class ThreadController extends Controller
     {
         $request->validate([
             'msg_body' => 'required|max:2000|min:10',
-            'thread_name' => 'required|max:500:10'
+            'thread_name' => 'required|max:500|min:10'
         ]);
 
         $thread = Thread::create([
@@ -49,6 +49,12 @@ class ThreadController extends Controller
         return back()->withInput();
     }
 
+    public function editThread(Request $request)
+    {
+        Thread::find($request['id'])->update(['title' => $request['title']]);
+        return $this->getSections(); 
+    }
+
     public function getThreads(int $section_id, Section $section)
     {
         $threads = Thread::where('section_id', $section_id)->where('is_delete', 0)->get();
@@ -60,4 +66,5 @@ class ThreadController extends Controller
         $threads = Thread::where('section_id', $section_id)->where('is_delete', 1)->get();
         return view('main', ['content' => $threads, 'type_page' => 'trash']);
     }
+
 }

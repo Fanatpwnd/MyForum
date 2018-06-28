@@ -29,6 +29,9 @@ Route::post('/AddSection', 'SectionController@addSection');
 Route::post('/DeleteSection', 'SectionController@deleteSection');
 //http://localhost:8000/DeleteSection?id=2
 
+Route::get('/EditSection', 'SectionController@editSection');
+//http://localhost:8000/EditSection?id=2&name=NewName&desc=NewDesc
+
 //*************/Threads/*************
 
 Route::get('/Threads/{id_section}', 'ThreadController@getThreads');
@@ -41,7 +44,10 @@ Route::get('/DeleteThread', 'ThreadController@deleteThread')->middleware('delete
 //http://localhost:8000/DeleteThread?id=2
 
 Route::get('/RestoreThread', 'ThreadController@restoreThread');
-//http://localhost:8000/DeleteThread?id=2
+//http://localhost:8000/RestoreThread?id=2
+
+Route::get('/EditThrread', 'ThreadController@editThread');
+//http://localhost:8000/EditThread?id=2&title=NewName
 
 //************/Messages/*************
 

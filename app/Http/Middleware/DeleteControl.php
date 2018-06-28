@@ -18,6 +18,8 @@ class DeleteControl
     public function handle($request, Closure $next)
     {
         
+        //TODO: Check for an empty thread
+
         if ($request->path() == 'DeleteMessage') {
             if ($request->user()['id'] != Message::find($request['id'])['user_id']) {
                 return back();

@@ -26,4 +26,10 @@ class SectionController extends Controller
         $sections = Section::where('is_hide', false)->get();
         return view('main', ['content' => $sections, 'type_page' => 'sections']);
     }
+
+    public function editSection(Request $request)
+    {
+        $section = Section::find($request['id'])->update(['name' => $request['name'], 'desc' => $request['desc']]);
+        return $this->getSections(); 
+    }
 }
