@@ -18,7 +18,7 @@ class CreateThreadsTable extends Migration
             $table->string('title');
             $table->integer('user_id');
             $table->integer('section_id');
-            $table->boolean('is_delete');
+            $table->boolean('is_delete')->default(false);
             $table->timestamps();
         });
     }

@@ -16,8 +16,8 @@ class MessageController extends Controller
 
         Message::create([   'body'      => $request['body'],
                             'user_id'   => $request->user()['id'],
-                            'thread_id' => $request['thread_id'],
-                            'is_delete' => false]);
+                            'thread_id' => $request['thread_id']
+                            ]);
 
         return back()->withInput();
     }

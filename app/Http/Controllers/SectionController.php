@@ -9,9 +9,9 @@ use App\Thread;
 class SectionController extends Controller
 {
     public function addSection(Request $request) {
-        Section::create([   'name'      => $request['section_name'], 
-                            'desc'      => $request['desc'],
-                            'is_hide'   => false]);
+        Section::create([   'name'      => $request['name'], 
+                            'desc'      => $request['desc']
+                            ]);
         return $this->getSections();
     }
 

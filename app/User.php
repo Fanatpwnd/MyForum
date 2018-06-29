@@ -41,4 +41,29 @@ class User extends Authenticatable
     {
         return $this->hasMany(Message::class);
     }
+
+    public function isAdmin()
+    {
+        return $this->userInfo->policy == 'admin';
+    }
+
+    public function isModerator()
+    {
+        return $this->userInfo->policy == 'moderator';
+    }
+
+    public function isVIP()
+    {
+        return $this->userInfo->policy == 'VIP';
+    }
+
+    public function isWriter()
+    {
+        return $this->userInfo->policy == 'writer';
+    }
+
+    public function isReader()
+    {
+        return $this->userInfo->policy == 'reader';
+    }
 }

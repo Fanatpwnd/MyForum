@@ -14,6 +14,9 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
+        factory(\App\UserInfo::class, 50)->create();
+        factory(\App\Thread::class, 50)->create();
+        factory(\App\Message::class, 200)->create();
         $this->assertTrue(true);
     }
 }

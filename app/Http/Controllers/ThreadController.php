@@ -20,13 +20,13 @@ class ThreadController extends Controller
         $thread = Thread::create([
                             'title'         => $request['thread_name'],
                             'user_id'       => $request->user()['id'],
-                            'section_id'    => $request['section_id'],
-                            'is_delete'     => false]);
+                            'section_id'    => $request['section_id']
+                            ]);
 
         Message::create([   'body'      => $request['msg_body'], 
                             'user_id'   => $request->user()['id'],
-                            'thread_id' => $thread['id'],
-                            'is_delete' => false]);
+                            'thread_id' => $thread['id']
+                            ]);
 
         return back()->withInput(); 
     }

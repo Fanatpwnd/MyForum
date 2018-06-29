@@ -17,7 +17,7 @@ class CreateSectionsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('desc');
-            $table->boolean('is_hide');
+            $table->boolean('is_hide')->default(false);
             $table->timestamps();
         });
     }

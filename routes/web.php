@@ -23,8 +23,8 @@ Route::get('/', function(){
 
 Route::get('/Sections', 'SectionController@getSections');
 
-Route::post('/AddSection', 'SectionController@addSection');
-//http://localhost:8000/AddSection?section_name=Mainsection
+Route::get('/AddSection', 'SectionController@addSection');
+//http://localhost:8000/AddSection?name=Main section&desc=Main section for test
 
 Route::post('/DeleteSection', 'SectionController@deleteSection');
 //http://localhost:8000/DeleteSection?id=2

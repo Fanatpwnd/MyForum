@@ -18,7 +18,7 @@ class CreateMessagesTable extends Migration
             $table->text('body');
             $table->integer('thread_id');
             $table->integer('user_id');
-            $table->boolean('is_delete');
+            $table->boolean('is_delete')->default(false);
             $table->timestamps();
         });
     }

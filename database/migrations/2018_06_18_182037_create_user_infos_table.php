@@ -17,9 +17,9 @@ class CreateUserInfosTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->string('nickname');
-            $table->string('avatar_path');
+            $table->string('avatar_path')->default('');
             $table->text('bio');
-            $table->boolean('is_banned');
+            $table->string('policy')->default('writer');
             $table->timestamps();
         });
     }
