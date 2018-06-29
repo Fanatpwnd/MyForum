@@ -31,7 +31,7 @@ class MessageController extends Controller
     public function editMessage(Request $request)
     {
         Message::find($request['id'])->update(['body' => $request['body']]);
-        return $this->getSections(); 
+        return back()->withInput(); 
     }
 
     public function restoreMessage(Request $request)

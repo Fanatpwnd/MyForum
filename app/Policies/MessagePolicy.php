@@ -42,7 +42,7 @@ class MessagePolicy
      */
     public function update(User $user, Message $message)
     {
-        //
+        return $user->isModerator() || $user->isAdmin() || ($user->isVIP() && ($user['id'] == $message['user_id']));
     }
 
     /**

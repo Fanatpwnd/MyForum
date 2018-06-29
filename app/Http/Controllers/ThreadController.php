@@ -52,7 +52,7 @@ class ThreadController extends Controller
     public function editThread(Request $request)
     {
         Thread::find($request['id'])->update(['title' => $request['title']]);
-        return $this->getSections(); 
+        return back()->withInput(); 
     }
 
     public function getThreads(int $section_id)

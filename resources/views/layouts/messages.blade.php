@@ -1,4 +1,16 @@
  <h1 align="center" class="text-info">Messages</h1>
+
+<script>
+function hideEdit(id) {
+    var x = document.getElementById("message"+id);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+} 
+</script>
+
 @if( count($content) >= 1)
     @foreach ($content as $item)
     <div style="padding: 10px;border-style: solid;border-width: 1px; margin-top: 2px; margin-left: 30px; margin-right: 30px;">
@@ -11,6 +23,18 @@
         <input type="hidden" name="id" value="{{$item->id}}">
         <input type="submit" value="Delete">
         </form>
+        @endcan
+        @can('update', $item)
+        <input type="button" value="Edit" onclick="hideEdit({{$item->id}})">
+        <div class="container" id='message{{$item->id}}' style='display: none;'>
+        <form action="\EditMessage" method="post" >
+            @csrf
+            <input type="hidden" name="id" value="{{$item->id}}">
+            Message body: <input type="text" name="body" id="body" value="{{$item->body}}" required>
+            <input type="hidden" name="thread_id" value="{{$thread_id}}">
+            <input type="submit" value="Edit message">
+        </form>
+        </div>
         @endcan
     </div>
     @endforeach
