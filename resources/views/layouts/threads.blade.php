@@ -4,18 +4,19 @@
             <div style="padding: 10px;border-style: solid;border-width: 1px; margin-top: 2px; margin-left: 30px; margin-right: 30px;">
             <h3><a href='\Messages\{{$item->id}}'>{{ $item->title }}</a></h3><p class='text-info'>Author: <a href='/user/{{$item->user['id']}}'> {{ $item->user->userInfo['nickname'] }}</a></p>
                 <p>Messages count: {{$item->messages->where('is_delete', false)->count()}}</p>
-                @auth
-                <form action="/DeleteThread" method="get">
+                @can('delete', $item)
+                <form action="/DeleteThread" method="post">
+                @csrf
                 <input type="hidden" name="id" value="{{$item->id}}">
                 <!-- <input type="hidden" name="section_id" value="{{$item->section_id}}"> -->
                 <input type="submit" value="Delete">
                 </form>
-                @endauth
+                @endcan
             </div> 
     @endforeach 
 @endif
 
-@auth
+@can('create', new \App\Thread) <!-- fuck -->
 <div class='container' style='margin-top : 10px;'>
 <form action="\AddThread" method="post">
     @csrf
@@ -25,7 +26,7 @@
     <input type="submit" value="Add topic">
 </form>
 </div>
-@endauth
+@endcan
             <h4 align="center"><a href="\Sections">Back</a></h4>
             @if ($errors->any())
                 <div class="alert alert-danger">

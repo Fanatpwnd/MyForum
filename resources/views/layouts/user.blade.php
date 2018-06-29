@@ -4,3 +4,6 @@
 <p class='text-info'><b>Bio: </b> {{ $content['bio'] }} </p>
 <p class='text-secondary'>Date create: <i>{{ $content['created_at'] }}</i></p>
 </div>
+{{ $content->user->messages }}
+<hr>
+{{ $content->user->threads }}
