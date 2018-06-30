@@ -19,7 +19,6 @@ function hideEdit(id) {
                 <form action="/DeleteThread" method="post">
                 @csrf
                 <input type="hidden" name="id" value="{{$item->id}}">
-                <!-- <input type="hidden" name="section_id" value="{{$item->section_id}}"> -->
                 <input type="submit" value="Delete">
                 </form>
                 @endcan
