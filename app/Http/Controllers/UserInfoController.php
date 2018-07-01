@@ -13,4 +13,11 @@ class UserInfoController extends Controller
         $content = UserInfo::where('user_id', $id)->get()[0];
         return view('main', ['content' => $content, 'type_page' => 'user']);
     }
+
+    public function selectRole(Request $request)
+    {
+        $result = UserInfo::where('id',$request['id'])->update(['policy' => $request['role']]);
+        //Why don't work "UserInfo::find($request['id'])->update(['policy' => $request['role']])?
+        return back();
+    }
 }

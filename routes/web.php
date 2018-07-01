@@ -8,42 +8,43 @@ Route::get('/', function(){
 
 Route::get('/Sections', 'SectionController@getSections');
 
-Route::get('/AddSection', 'SectionController@addSection');
+Route::get('/AddSection', 'SectionController@addSection')->middleware('add');
 
-Route::post('/DeleteSection', 'SectionController@deleteSection');
+Route::post('/DeleteSection', 'SectionController@deleteSection')->middleware('delete');
 
-Route::get('/EditSection', 'SectionController@editSection');
+Route::get('/EditSection', 'SectionController@editSection');//->middleware
 
 //*************/Threads/*************
 
 Route::get('/Threads/{id_section}', 'ThreadController@getThreads');
 Route::get('/GetDeletedThreads/{id_section}', 'ThreadController@getDeletedThreads');
 
-Route::post('/AddThread', 'ThreadController@addThread'); 
+Route::post('/AddThread', 'ThreadController@addThread')->middleware('add');
 
-Route::post('/EditThread', 'ThreadController@editThread');
+Route::post('/EditThread', 'ThreadController@editThread')->middleware('edit');
 
 Route::post('/DeleteThread', 'ThreadController@deleteThread')->middleware('delete');
 
-Route::get('/RestoreThread', 'ThreadController@restoreThread');
-
-Route::get('/EditThrread', 'ThreadController@editThread');
+Route::get('/RestoreThread', 'ThreadController@restoreThread');//->middleware
 
 //************/Messages/*************
 
 Route::get('/Messages/{id_thread}', 'MessageController@getMessages');
 Route::get('/GetDeletedMessages/{id_thread}', 'MessageController@getDeletedMessages');
 
-Route::post('/AddMessage', 'MessageController@addMessage'); 
+Route::post('/AddMessage', 'MessageController@addMessage')->middleware('add');
 
-Route::post('/EditMessage', 'MessageController@editMessage');
+Route::post('/EditMessage', 'MessageController@editMessage')->middleware('edit');
 
 Route::post('/DeleteMessage', 'MessageController@deleteMessage')->middleware('delete');
 
-Route::get('/RestoreMessage', 'MessageController@restoreMessage');
+Route::get('/RestoreMessage', 'MessageController@restoreMessage');//->middleware
 
 //**************/User/**************
+
 Route::get('/user/{id}', 'UserInfoController@getUser');
+
+Route::post('/ChangeRole', 'UserInfoController@selectRole');//->middleware
 
 //**************/Load/**************
 Route::get('/load', 'AvatarController@load');

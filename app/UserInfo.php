@@ -11,5 +11,10 @@ class UserInfo extends Model
         return $this->belongsTo(User::class);
     }
 
+    public static function getRoles()
+    {
+        return ['admin', 'moderator', 'VIP', 'writer', 'reader'];
+    }
+
     protected $fillable = ['user_id', 'nickname', 'avatar_path', 'bio'];
 }

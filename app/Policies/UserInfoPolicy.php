@@ -42,7 +42,7 @@ class UserInfoPolicy
      */
     public function update(User $user, UserInfo $userInfo)
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
