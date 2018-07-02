@@ -44,7 +44,7 @@ Route::get('/RestoreMessage', 'MessageController@restoreMessage');//->middleware
 
 Route::get('/user/{id}', 'UserInfoController@getUser');
 
-Route::post('/ChangeRole', 'UserInfoController@selectRole');//->middleware
+Route::post('/ChangeRole', 'UserInfoController@selectRole')->middleware('edit');
 
 //**************/Load/**************
 Route::get('/load', 'AvatarController@load');

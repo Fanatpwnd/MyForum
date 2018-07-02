@@ -14,6 +14,18 @@ class MessageController extends Controller
             'body' => 'required|max:2000|min:10',
         ]);
 
+        //<TODO>
+        $client = new \GuzzleHttp\Client();
+        $res = $client->post('https://www.google.com/recaptcha/api/siteverify',['query' => [
+            'secret' => config('app.recaptcha_key'), 
+            'response' => $request['g-recaptcha-response']]
+            ]);
+        $captcha = json_decode((string) $res->getBody())->success;
+        if ($captcha == false) {
+            return back()->withInput();
+        }
+        //</TODO>
+
         Message::create([   'body'      => $request['body'],
                             'user_id'   => $request->user()['id'],
                             'thread_id' => $request['thread_id']

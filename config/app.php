@@ -211,4 +211,6 @@ return [
 
     ],
 
+    'recaptcha_key' => env('RECAPTCHA_KEY'),
+
 ];

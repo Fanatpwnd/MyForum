@@ -10,6 +10,8 @@ function hideEdit(id) {
     }
 } 
 </script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 
 @if( count($content) >= 1)
     @foreach ($content as $item)
@@ -45,6 +47,8 @@ function hideEdit(id) {
     @csrf
     Message body: <input type="text" name="body" id="body" required>
     <input type="hidden" name="thread_id" value="{{$thread_id}}">
+    <div class="g-recaptcha" data-sitekey="6LfwimEUAAAAACubDWt2inFxpjmhFSe3NgjZ44na"></div>
+
     <input type="submit" value="Add message">
 </form>
 </div>
