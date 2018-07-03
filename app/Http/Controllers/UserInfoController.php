@@ -17,7 +17,13 @@ class UserInfoController extends Controller
     public function selectRole(Request $request)
     {
         $result = UserInfo::where('id',$request['id'])->update(['policy' => $request['role']]);
-        //Why don't work "UserInfo::find($request['id'])->update(['policy' => $request['role']])?
+        //TODO: Why don't work "UserInfo::find($request['id'])->update(['policy' => $request['role']])?
+        return back();
+    }
+
+    public function editBio(Request $request)
+    {
+        UserInfo::where('id', $request['id'])->update(['bio' => $request['bio']]);
         return back();
     }
 }

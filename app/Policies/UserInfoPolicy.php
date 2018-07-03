@@ -40,9 +40,14 @@ class UserInfoPolicy
      * @param  \App\UserInfo  $userInfo
      * @return mixed
      */
-    public function update(User $user, UserInfo $userInfo)
+    public function updateRole(User $user, UserInfo $userInfo)
     {
         return $user->isAdmin();
+    }
+
+    public function updateBio(User $user, UserInfo $userInfo)
+    {
+        return $user->isAdmin() || $userInfo['id'] == $user['id'];
     }
 
     /**

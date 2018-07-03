@@ -46,6 +46,8 @@ Route::get('/user/{id}', 'UserInfoController@getUser');
 
 Route::post('/ChangeRole', 'UserInfoController@selectRole')->middleware('edit');
 
+Route::post('/EditBio', 'UserInfoController@editBio');
+
 //**************/Load/**************
 Route::get('/load', 'AvatarController@load');
 Route::post('loadImage', 'AvatarController@store');
