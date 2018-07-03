@@ -14,6 +14,7 @@ function hideEdit(id) {
 
 
 @if( count($content) >= 1)
+    <div style='margin-left: 30px;'> {{ $content->links() }} </div>
     @foreach ($content as $item)
     <div style="padding: 10px;border-style: solid;border-width: 1px; margin-top: 2px; margin-left: 30px; margin-right: 30px;">
         <h4><span class='text-secondary'>ID #{{$item->id}} | </span><span class='text-info'>Author: <a href='/user/{{$item->user['id']}}'> {{ $item->user->userInfo['nickname'] }}</a></span></h4><hr>
@@ -40,6 +41,7 @@ function hideEdit(id) {
         @endcan
     </div>
     @endforeach
+    <div style='margin-left: 30px;'> {{ $content->links() }} </div>
 @endif
 @can('create', new \App\Message) <!-- fuck -->
 <div class='container' style='margin-top : 10px;'>

@@ -57,7 +57,7 @@ class ThreadController extends Controller
 
     public function getThreads(int $section_id)
     {
-        $threads = Thread::where('section_id', $section_id)->where('is_delete', 0)->get();
+        $threads = Thread::where('section_id', $section_id)->where('is_delete', 0)->paginate(10);
         return view('main', ['content' => $threads, 'type_page' => 'threads', 'section_id' => $section_id]);
     }
 
