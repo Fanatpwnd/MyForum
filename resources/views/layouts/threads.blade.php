@@ -15,7 +15,7 @@ function hideEdit(id) {
     @foreach ($content as $item)
             <div style="padding: 10px;border-style: solid;border-width: 1px; margin-top: 2px; margin-left: 30px; margin-right: 30px;">
             <h3><a href='\Messages\{{$item->id}}'>{{ $item->title }}</a></h3><p class='text-info'>Author: <a href='/user/{{$item->user['id']}}'> {{ $item->user->userInfo['nickname'] }}</a></p>
-                <p>Messages count: {{$item->messages->where('is_delete', false)->count()}}</p>
+                <p>Messages count: {{$item->messages->where('is_delete', false)->count()}} | {{$item->created_at->diffForHumans()}}</p>
                 @can('delete', $item)
                 <form action="/DeleteThread" method="post">
                 @csrf
