@@ -56,3 +56,5 @@ Route::post('loadImage', 'AvatarController@store');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/VKLogin', 'Auth\RegisterController@vkLogin');

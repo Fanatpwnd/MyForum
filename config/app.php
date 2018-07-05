@@ -212,5 +212,7 @@ return [
     ],
 
     'recaptcha_key' => env('RECAPTCHA_KEY'),
+    'vk_secret_key' => env('VK_SECRET_KEY'),
+    'vk_id_app'     => env('VK_ID_APP')
 
 ];

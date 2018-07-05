@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -79,5 +81,37 @@ class RegisterController extends Controller
             'is_banned'     => false
         ]);
         return $user;
+    }
+
+    public function vkLogin(Request $request)
+    {
+        //fuck
+        //fuck
+        //fuck
+        //fuck
+        //fuck
+        if (count(User::where('name', $request['uid'])->get()) == 0) {//fuck
+            $user = User::create([  'name'      => $request['uid'],//fuck
+                                    'email'     => 'VKAccount@VKAccount.VKAccount',//fuck
+                                    'password'  => $request['hash']]);//fuck
+            //fuck
+            UserInfo::create([//fuck
+                'user_id'       => $user['id'],//fuck
+                'nickname'      => $request['first_name'] . ' ' . $request['last_name'],//fuck
+                'bio'           => 'Empty',//fuck
+                'avatar_path'   => $request['photo'],//fuck
+                'is_banned'     => false//fuck
+            ]);//fuck
+            Auth::login($user);//fuck
+        }//fuck
+        else if (md5(config('app.vk_id_app').$request['uid'].config('app.vk_secret_key')) == User::where('name', $request['uid'])->get()[0]['password']){  //https://vk.com/dev/Login
+            Auth::login(User::where('name', $request['uid'])->get()[0]);//fuck
+        }//fuck
+        //fuck
+        //fuck
+        return redirect('/');//fuck
+        //fuck
+
+        //TODO: FUCK
     }
 }
