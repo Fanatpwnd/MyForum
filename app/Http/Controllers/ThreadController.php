@@ -55,10 +55,20 @@ class ThreadController extends Controller
         return back()->withInput(); 
     }
 
-    public function getThreads(int $section_id)
+    public function getThreads($section_id, Request $request)
     {
-        $threads = Thread::where('section_id', $section_id)->where('is_delete', 0)->orderBy('created_at', 'desc')->paginate(10);
-        return view('main', ['content' => $threads, 'type_page' => 'threads', 'section_id' => $section_id]);
+        $paginate = isset($request['paginate'])? $request['paginate'] : '10';
+        $order_by = isset($request['order_by'])? $request['order_by'] : 'desc';
+        
+        $threads = Thread::where('section_id', $section_id)
+            ->where('is_delete', 0)
+            ->orderBy('created_at', $order_by)
+            ->paginate($paginate);
+        return view('main', ['content' => $threads, 'type_page' => 'threads', 'params' => [
+            'section_id'    => $section_id,
+            'order_by'      => $order_by,
+            'paginate'      => $paginate
+            ]]);
     }
 
     public function getDeletedThreads(int $section_id)

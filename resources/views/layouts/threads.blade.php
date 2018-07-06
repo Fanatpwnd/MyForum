@@ -1,4 +1,16 @@
             <h1 align="center" class="text-info">Threads</h1><br>
+<div class="form-group">
+    <form action="#" method="get">
+  <label for="sel1">Sort by date:</label>
+  <select id="sel1" name='order_by'>
+    <option value="desc" @if( $params['order_by'] == 'desc' ) selected @endif>DESC</option>
+    <option value="asc" @if( $params['order_by'] == 'asc' ) selected @endif>ASC</option>
+  </select>
+  <label for="sel1">Threads per page:</label>
+  <input type="text" name="paginate" value="{{$params['paginate']}}">
+  <input type="submit" value="Update">
+  </form>
+</div>
 <script>
 function hideEdit(id) {
     var x = document.getElementById("thread"+id);
@@ -45,7 +57,7 @@ function hideEdit(id) {
     @csrf
     Thread title: <input type="text" name="thread_name" id="thread_name" required>
     Message body: <input type="text" name="msg_body" id="msg_body" required>
-    <input type="hidden" name="section_id" value="{{$section_id}}">
+    <input type="hidden" name="section_id" value="{{$params->section_id}}">
     <input type="submit" value="Add topic">
 </form>
 </div>
