@@ -11,6 +11,7 @@
   <input type="submit" value="Update">
   </form>
 </div>
+@can('update', new \App\Thread)
 <script>
 function hideEdit(id) {
     var x = document.getElementById("thread"+id);
@@ -21,6 +22,7 @@ function hideEdit(id) {
     }
 } 
 </script>
+@endcan
 
 @if( count($content) >= 1)
     <div style='margin-left: 30px;'> {{ $content->links() }} </div>
@@ -57,7 +59,7 @@ function hideEdit(id) {
     @csrf
     Thread title: <input type="text" name="thread_name" id="thread_name" required>
     Message body: <input type="text" name="msg_body" id="msg_body" required>
-    <input type="hidden" name="section_id" value="{{$params->section_id}}">
+    <input type="hidden" name="section_id" value="{{$params['section_id']}}">
     <input type="submit" value="Add topic">
 </form>
 </div>

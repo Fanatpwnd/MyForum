@@ -8,11 +8,11 @@ Route::get('/', function(){
 
 Route::get('/Sections', 'SectionController@getSections');
 
-Route::get('/AddSection', 'SectionController@addSection')->middleware('add');
+Route::post('/AddSection', 'SectionController@addSection')->middleware('add');
 
 Route::post('/DeleteSection', 'SectionController@deleteSection')->middleware('delete');
 
-Route::get('/EditSection', 'SectionController@editSection');//->middleware
+Route::post('/EditSection', 'SectionController@editSection');//->middleware
 
 //*************/Threads/*************
 

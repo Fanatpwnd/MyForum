@@ -12,13 +12,13 @@ class SectionController extends Controller
         Section::create([   'name'      => $request['name'], 
                             'desc'      => $request['desc']
                             ]);
-        return $this->getSections();
+        return back();
     }
 
     public function deleteSection(Request $request)
     {
         Section::where('id', '=', $request['id'])->update(['is_hide' => true]);
-        return $this->getSections();
+        return back();
     }
 
     public static function getSections()
@@ -30,6 +30,6 @@ class SectionController extends Controller
     public function editSection(Request $request)
     {
         $section = Section::find($request['id'])->update(['name' => $request['name'], 'desc' => $request['desc']]);
-        return $this->getSections(); 
+        return back();
     }
 }
