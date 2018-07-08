@@ -18,7 +18,7 @@ function hideEdit(id) {
     @foreach ($content as $item)
     <div style="padding: 10px;border-style: solid;border-width: 1px; margin-top: 2px; margin-left: 30px; margin-right: 30px;">
         <h4><span class='text-secondary'>ID #{{$item->id}} | </span><span class='text-info'>Author: <a href='/user/{{$item->user['id']}}'> {{ $item->user->userInfo['nickname'] }}</a></span></h4><hr>
-        <p>{{$item->body}}</p>
+        <p>{!! \GrahamCampbell\Markdown\Facades\Markdown::convertToHtml($item->body) !!} @if(\GrahamCampbell\Markdown\Facades\Markdown::convertToHtml($item->body) == '') <span style="color: red;">Message don't show because used HTML-tags</span> @endif</p>
         <img src="{{ $item->user->userInfo['avatar_path']}}" alt="{{ $item->user->userInfo['nickname'] }}'s avatar">
         @can('delete', $item)
         <form action="/DeleteMessage" method="post">
