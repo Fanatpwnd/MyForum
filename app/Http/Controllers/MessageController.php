@@ -54,7 +54,6 @@ class MessageController extends Controller
 
     public function getMessages(int $thread_id)
     {
-        echo(\GrahamCampbell\Markdown\Facades\Markdown::convertToHtml('## Suka'));
         $msgs = Message::where('thread_id', $thread_id)->where('is_delete', 0)->paginate(10);
         return view('main', ['content' => $msgs, 'type_page' => 'messages', 'thread_id' => $thread_id, 'section_id' => Thread::find($thread_id)->section['id']]);
         //TODO: Remove var 'section_id'
