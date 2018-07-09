@@ -52,10 +52,23 @@ class MessageController extends Controller
         return back()->withInput();
     }
 
-    public function getMessages(int $thread_id)
+    public function getMessages(int $thread_id, Request $request)
     {
-        $msgs = Message::where('thread_id', $thread_id)->where('is_delete', 0)->paginate(10);
-        return view('main', ['content' => $msgs, 'type_page' => 'messages', 'thread_id' => $thread_id, 'section_id' => Thread::find($thread_id)->section['id']]);
+        $paginate = isset($request['paginate'])? $request['paginate'] : '10';
+        $order_by = isset($request['order_by'])? $request['order_by'] : 'desc';
+
+
+        $msgs = Message::where('thread_id', $thread_id)
+            ->where('is_delete', 0)
+            ->orderBy('created_at', $order_by)
+            ->paginate($paginate);
+            
+        return view('main', ['content' => $msgs, 'type_page' => 'messages', 'params' => [
+            'thread_id' => $thread_id, 
+            'section_id' => Thread::find($thread_id)->section['id'],
+            'order_by'      => $order_by,
+            'paginate'      => $paginate
+            ]]);
         //TODO: Remove var 'section_id'
     }
 
