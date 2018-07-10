@@ -17,6 +17,16 @@ class ThreadController extends Controller
             'thread_name' => 'required|max:500|min:10'
         ]);
 
+        $client = new \GuzzleHttp\Client();
+        $res = $client->post('https://www.google.com/recaptcha/api/siteverify',['query' => [
+            'secret' => config('app.recaptcha_key'), 
+            'response' => $request['g-recaptcha-response']]
+            ]);
+        $captcha = json_decode((string) $res->getBody())->success;
+        if ($captcha == false) {
+            return back()->withInput();
+        }
+
         $thread = Thread::create([
                             'title'         => $request['thread_name'],
                             'user_id'       => $request->user()['id'],
@@ -55,10 +65,20 @@ class ThreadController extends Controller
         return back()->withInput(); 
     }
 
-    public function getThreads(int $section_id)
+    public function getThreads($section_id, Request $request)
     {
-        $threads = Thread::where('section_id', $section_id)->where('is_delete', 0)->paginate(10);
-        return view('main', ['content' => $threads, 'type_page' => 'threads', 'section_id' => $section_id]);
+        $paginate = isset($request['paginate'])? $request['paginate'] : '10';
+        $order_by = isset($request['order_by'])? $request['order_by'] : 'desc';
+        
+        $threads = Thread::where('section_id', $section_id)
+            ->where('is_delete', 0)
+            ->orderBy('created_at', $order_by)
+            ->paginate($paginate);
+        return view('main', ['content' => $threads, 'type_page' => 'threads', 'params' => [
+            'section_id'    => $section_id,
+            'order_by'      => $order_by,
+            'paginate'      => $paginate
+            ]]);
     }
 
     public function getDeletedThreads(int $section_id)

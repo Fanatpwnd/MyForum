@@ -28,9 +28,9 @@ class SectionPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user, Section $section)
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
@@ -42,7 +42,7 @@ class SectionPolicy
      */
     public function update(User $user, Section $section)
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
@@ -54,6 +54,6 @@ class SectionPolicy
      */
     public function delete(User $user, Section $section)
     {
-        //
+        return $user->isAdmin();
     }
 }

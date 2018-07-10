@@ -8,15 +8,15 @@ Route::get('/', function(){
 
 Route::get('/Sections', 'SectionController@getSections');
 
-Route::get('/AddSection', 'SectionController@addSection')->middleware('add');
+Route::post('/AddSection', 'SectionController@addSection')->middleware('add');
 
 Route::post('/DeleteSection', 'SectionController@deleteSection')->middleware('delete');
 
-Route::get('/EditSection', 'SectionController@editSection');//->middleware
+Route::post('/EditSection', 'SectionController@editSection');//->middleware
 
 //*************/Threads/*************
 
-Route::get('/Threads/{id_section}', 'ThreadController@getThreads');
+Route::get('/Threads/{section_id}', 'ThreadController@getThreads');
 Route::get('/GetDeletedThreads/{id_section}', 'ThreadController@getDeletedThreads');
 
 Route::post('/AddThread', 'ThreadController@addThread')->middleware('add');
