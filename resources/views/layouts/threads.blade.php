@@ -23,6 +23,7 @@ function hideEdit(id) {
 } 
 </script>
 @endcan
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 @if( count($content) >= 1)
     <div style='margin-left: 30px;'> {{ $content->links() }} </div>
@@ -60,6 +61,7 @@ function hideEdit(id) {
     Thread title: <input type="text" name="thread_name" id="thread_name" required>
     Message body: <input type="text" name="msg_body" id="msg_body" required>
     <input type="hidden" name="section_id" value="{{$params['section_id']}}">
+    <div class="g-recaptcha" data-sitekey="6LfwimEUAAAAACubDWt2inFxpjmhFSe3NgjZ44na"></div>
     <input type="submit" value="Add topic">
 </form>
 </div>

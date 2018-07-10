@@ -17,6 +17,16 @@ class ThreadController extends Controller
             'thread_name' => 'required|max:500|min:10'
         ]);
 
+        $client = new \GuzzleHttp\Client();
+        $res = $client->post('https://www.google.com/recaptcha/api/siteverify',['query' => [
+            'secret' => config('app.recaptcha_key'), 
+            'response' => $request['g-recaptcha-response']]
+            ]);
+        $captcha = json_decode((string) $res->getBody())->success;
+        if ($captcha == false) {
+            return back()->withInput();
+        }
+
         $thread = Thread::create([
                             'title'         => $request['thread_name'],
                             'user_id'       => $request->user()['id'],

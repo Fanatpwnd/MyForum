@@ -13,6 +13,7 @@
   </form>
 </div>
 
+@can('update', new \App\Message) <!-- fuck -->
 <script>
 function hideEdit(id) {
     var x = document.getElementById("message"+id);
@@ -23,6 +24,7 @@ function hideEdit(id) {
     }
 } 
 </script>
+@endcan
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 
