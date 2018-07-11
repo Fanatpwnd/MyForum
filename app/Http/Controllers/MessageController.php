@@ -77,4 +77,10 @@ class MessageController extends Controller
         $msgs = Message::where('thread_id', $thread_id)->where('is_delete', 1)->get();
         return view('main', ['content' => $msgs, 'type_page' => 'messages']);
     }
+
+    public static function getLastMessages() //TODO: move to service
+    {
+        $msgs = Message::where('is_delete', 0)->orderBy('created_at', 'desc')->take(5)->get();
+        return $msgs;
+    }
 }
