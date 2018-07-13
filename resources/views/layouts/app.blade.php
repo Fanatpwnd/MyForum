@@ -82,12 +82,12 @@
         @php $messages = \App\Http\Controllers\MessageController::getLastMessages() @endphp <!-- hack -->
         
         @if( count($messages) >= 1)
-            <h3>Last {{count($messages)}} messages</h3>
+            <h3>@lang('layout.last') {{count($messages)}} @lang('layout.messages')</h3>
             @foreach ($messages as $item)
             <div style="padding: 10px;border-style: solid;border-width: 1px; margin-top: 2px; margin-left: 30px; margin-right: 30px;">
-                <h3><a href='\Messages\{{$item->thread->id}}'>Thread: {{ $item->thread->title }}</a></h3>
-                <h4><span class='text-secondary'>ID #{{$item->id}} | </span><span class='text-info'>Author: <a href='/user/{{$item->user['id']}}'> {{ $item->user->userInfo['nickname'] }}</a></span></h4><hr>
-                <p>{!! \GrahamCampbell\Markdown\Facades\Markdown::convertToHtml($item->body) !!} @if(\GrahamCampbell\Markdown\Facades\Markdown::convertToHtml($item->body) == '') <span style="color: red;">Message don't show because used HTML-tags</span> @endif</p>
+                <h3><a href='\Messages\{{$item->thread->id}}'>@lang('layout.thread'): {{ $item->thread->title }}</a></h3>
+                <h4><span class='text-secondary'>ID #{{$item->id}} | </span><span class='text-info'>@lang('layout.author'): <a href='/user/{{$item->user['id']}}'> {{ $item->user->userInfo['nickname'] }}</a></span></h4><hr>
+                <p>{!! \GrahamCampbell\Markdown\Facades\Markdown::convertToHtml($item->body) !!} @if(\GrahamCampbell\Markdown\Facades\Markdown::convertToHtml($item->body) == '') <span style="color: red;">@lang('messages.html')</span> @endif</p>
             </div>
             @endforeach
         @endif
