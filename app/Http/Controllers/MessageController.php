@@ -55,7 +55,7 @@ class MessageController extends Controller
     public function getMessages(int $thread_id, Request $request)
     {
         $paginate = isset($request['paginate'])? $request['paginate'] : '10';
-        $order_by = isset($request['order_by'])? $request['order_by'] : 'desc';
+        $order_by = isset($request['order_by'])? $request['order_by'] : 'asc';
 
 
         $msgs = Message::where('thread_id', $thread_id)
@@ -69,7 +69,6 @@ class MessageController extends Controller
             'order_by'      => $order_by,
             'paginate'      => $paginate
             ]]);
-        //TODO: Remove var 'section_id'
     }
 
     public function getDeletedMessages(int $thread_id)
