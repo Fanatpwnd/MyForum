@@ -26,11 +26,39 @@ function hideEdit(id) {
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 @if( count($content) >= 1)
+    <div style='margin-left: 30px;'> {{ $content->links() }} </div> 
+    <table class="table">
+    <thead>
+        <tr>
+        <th scope="col">ID</th>
+        <th scope="col">@lang('threads.author')</th>
+        <th scope="col">Title & Body</th>
+        <th scope="col">@lang('threads.count')</th>
+        <th scope="col">Created at</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach ($content as $item)
+    <tr>
+        <th scope="row">{{$item['id']}}</th>
+        <td><a href='/user/{{$item->user['id']}}'> {{ $item->user->userInfo['nickname'] }}</a></td>
+        <td><a href='\Messages\{{$item->id}}'>{{ $item->title }}</a><p class="text-secondary">{{$item->messages->first()['body']}}</p></td>
+        <td>{{$item->messages->where('is_delete', false)->count()}}</td>
+        <td>{{$item->created_at->diffForHumans()}}</td>
+    </tr>
+    @endforeach
+    </tbody>
+    </table>
+    <div style='margin-left: 30px;'> {{ $content->links() }} </div>
+@endif
+
+@if( count($content) >= 1)
     <div style='margin-left: 30px;'> {{ $content->links() }} </div>
     @foreach ($content as $item)
             <div style="padding: 10px;border-style: solid;border-width: 1px; margin-top: 2px; margin-left: 30px; margin-right: 30px;">
             <h3><a href='\Messages\{{$item->id}}'>{{ $item->title }}</a></h3><p class='text-info'>@lang('threads.author'): <a href='/user/{{$item->user['id']}}'> {{ $item->user->userInfo['nickname'] }}</a></p>
                 <p>@lang('threads.count'): {{$item->messages->where('is_delete', false)->count()}} | {{$item->created_at->diffForHumans()}}</p>
+                <p>{{$item->messages->first()['body']}}</p>
                 @can('delete', $item)
                 <form action="/DeleteThread" method="post">
                 @csrf
